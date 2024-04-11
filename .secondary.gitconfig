@@ -1,0 +1,12 @@
+[user]
+    # Your name for Git commits
+    name = <secondary-user-name> 
+    # Your email for Git commits
+    email = <secondary-user-email>  
+    # Your GPG signing key ID for Git commits
+    signingkey = <secondary-gpg-signingkey>
+
+# Commit settings
+[commit]
+    # Enable GPG signing for commits
+    gpgsign = true

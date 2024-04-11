@@ -1,0 +1,173 @@
+# vim: set ft=gitconfig:
+# .gitconfig
+#
+# Maintained by Truong Nhan Nguyen (SOZEL) <nhantruongnguyen123@gmail.com>
+# https://github.com/TruongNhanNguyen
+
+# User information
+[user]
+    # Your name for Git commits
+    name = Truong Nhan Nguyen
+    # Your email for Git commits
+    email = nhantruongnguyen123@gmail.com
+    # Your GPG signing key ID for Git commits
+    signingkey = 9F75ADD29C76427C
+
+# Commit settings
+[commit]
+    # Enable GPG signing for commits
+    gpgsign = true
+
+# Credential settings
+[credential]
+    # Specify GPG as the credential store
+    credentialStore = gpg
+
+# aliases for frequently used Git commands to save time and typing effort.
+[alias]
+    co = checkout
+    br = branch
+    ci = commit
+    st = status
+    log-graph = log --graph --abbrev-commit --decorate --all --format=format:'%C(bold red)%h%C(reset) - %C(bold cyan)%aD%C(dim white) - %an%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)'
+    remotes  = remote -v
+    branches = branch -a
+    # Clean up local git branches that are tracking remote branches that no longer exist.
+    gone = ! "git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}' | xargs -r git branch -D"
+
+# Core settings
+[core]
+    # Text editor for commit messages and other text editing tasks
+    editor = nvim
+    # Convert line endings to LF on checkout and CRLF on commit
+    autocrlf = true
+    # Use delta as the default pager for Git commands
+    pager = delta
+
+# Help settings
+[help]
+    # Automatically correct and execute mistyped commands after waiting for the given number of deciseconds (0.1 sec)
+    autocorrect = 30
+    # Override the default help format used by `git help`
+    format = man
+
+# GPG settings
+[gpg]
+    # Specify the GPG program to use
+    program = gpg
+
+# Column settings
+[column]
+    # Disable column UI for Git commands
+    ui = never
+
+# Color settings
+[color]
+    # Enable automatic detection of terminal color capabilities
+    ui = auto
+[color "branch"]
+    # Color settings for branch status
+    current = yellow bold
+    local = green bold
+    remote = red bold
+[color "diff"]
+    # Color settings for diff output
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+    whitespace = red reverse
+[color "status"]
+    # Color settings for status output
+    added = green bold
+    changed = yellow bold
+    untracked = red bold
+
+# Initialization settings
+[init]
+    # Specify the default branch name for new repositories
+    defaultBranch = master
+
+# Merge settings
+[merge]
+    # Use vimdiff as the merge tool
+    tool = vimdiff
+    # Show conflicts in diff3 style
+    conflictstyle = diff3
+
+# Push settings
+[push]
+    # Push should only push the current branch, not all branches
+    default = current
+    # Enable `--follow-tags` option by default
+    followTags = true
+
+# Pull settings
+[pull]
+    # Use rebase instead of merge when pulling
+    rebase = true
+
+# Rebase settings
+[rebase]
+    # Automatically create a temporary stash entry before the operation begins, and apply it after the operation ends
+    autostash = true
+
+# Status settings
+[status]
+    # Enable the submodule summary and show a summary of commits for modified submodules
+    submoduleSummary = true
+
+# Git LFS filter settings
+[filter "lfs"]
+    # Specify clean/smudge/process commands for Git LFS
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    # Mark Git LFS as required for this repository
+    required = true
+
+# Interactive settings
+[interactive]
+    # Specify the diff filter for interactive use, using delta with color-only and interactive features
+    diffFilter = delta --color-only --features=interactive
+
+# Delta settings
+[delta]
+    # Enable additional features for delta, including decorations and hyperlinks
+    feature = decorations
+    navigate = true
+    light = false
+    line-numbers = true
+    side-by-side = true
+    hyperlinks = true
+
+# Diff settings
+[diff]
+    # Specify the default color for moved lines in diffs
+    colorMoved = default
+
+# Credential helper settings for GitHub
+[credential "https://github.com"]
+    # Specify custom credential helpers for GitHub URLs
+    helper = 
+    helper = !/usr/bin/gh auth git-credential
+
+# Credential helper settings for Gist
+[credential "https://gist.github.com"]
+    # Specify custom credential helpers for GitHub Gist URLs
+    helper = 
+    helper = !/usr/bin/gh auth git-credential
+
+# Branch settings
+[branch]
+    # Sort branches by committer date in reverse order
+    sort = -committerdate
+
+
+###################################################
+# Users
+###################################################
+
+# Configuration for a secondary user (example)
+# [includeIf "gitdir:~/workspace/secondary/"]
+#    path = ~/.secondary.gitconfig
