@@ -19,6 +19,7 @@
     gpgsign = true
 
 # Credential settings
+# You don't need to type gpg-key when running push to or pull from a remote repo
 [credential]
     # Specify GPG as the credential store
     credentialStore = gpg
