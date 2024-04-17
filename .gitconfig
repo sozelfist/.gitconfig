@@ -33,8 +33,15 @@
     log-graph = log --graph --abbrev-commit --decorate --all --format=format:'%C(bold red)%h%C(reset) - %C(bold cyan)%aD%C(dim white) - %an%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)'
     remotes  = remote -v
     branches = branch -a
-    # Clean up local git branches that are tracking remote branches that no longer exist.
+    # Clean up local git branches tracking remote branches that no longer exist.
     gone = ! "git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}' | xargs -r git branch -D"
+    # Clean up the local git branch and its corresponding remote-tracking branch from your keyboard after a PR is accepted.	
+    cleanup = "!f() { \
+        local_branch=\"$2\"; \
+        remote=\"$1\"; \
+        git branch -D \"$local_branch\"; \
+        git push \"$remote\" --delete \"$local_branch\"; \
+    }; f"
 
 # Core settings
 [core]
