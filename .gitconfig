@@ -36,11 +36,17 @@
     # Clean up local git branches tracking remote branches that no longer exist.
     gone = ! "git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}' | xargs -r git branch -D"
     # Clean up the local git branch and its corresponding remote-tracking branch from your keyboard after a PR is accepted.	
-    cleanup = "!f() { \
-        local_branch=\"$2\"; \
+    clean-pr = "!f() { \
         remote=\"$1\"; \
+        local_branch=\"$2\"; \
         git branch -D \"$local_branch\"; \
         git push \"$remote\" --delete \"$local_branch\"; \
+    }; f"
+    # Clean up PR checkout
+    clean-pr-co = "!f() { \
+        local_branch=\"$1\"; \
+        git branch -D \"$local_branch\"; \
+        git branch -D --remote \"$local_branch\"; \
     }; f"
 
 # Core settings
