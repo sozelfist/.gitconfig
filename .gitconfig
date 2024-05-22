@@ -42,11 +42,13 @@
         git branch -D \"$local_branch\"; \
         git push \"$remote\" --delete \"$local_branch\"; \
     }; f"
-    # Clean up PR checkout
+    # Clean up PR checkout (delete local, remote-tracking, and remote)
     clean-pr-co = "!f() { \
-        local_branch=\"$1\"; \
-        git branch -D \"$local_branch\"; \
-        git branch -D --remote \"$local_branch\"; \
+    	author=\"$1\"; \
+	    branch=\"$2\"; \
+        git branch -D \"$author/$branch\"; \
+	    git branch -D --remote \"$author/$branch\"; \
+	    git remote remove \"$author\"; \
     }; f"
 
 # Core settings
