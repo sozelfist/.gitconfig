@@ -35,21 +35,29 @@
     branches = branch -a
     # Clean up local git branches tracking remote branches that no longer exist.
     gone = ! "git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}' | xargs -r git branch -D"
-    # Clean up the local git branch and its corresponding remote-tracking branch from your keyboard after a PR is accepted.	
+    # Clean up both the local git branch and its corresponding remote tracking branch from your keyboard after a PR was accepted.	
     clean-pr = "!f() { \
         remote=\"$1\"; \
         local_branch=\"$2\"; \
+    	echo \"Removing local branch $local_branch...\"; \
         git branch -D \"$local_branch\"; \
+    	echo \"Removing remote $remote...\"; \
         git push \"$remote\" --delete \"$local_branch\"; \
+	echo \"Completed\"; \
     }; f"
-    # Clean up PR checkout (delete local, remote-tracking, and remote)
+    # Clean up PR checkout (delete local, remote-tracking and remote)
     clean-pr-co = "!f() { \
-    	author=\"$1\"; \
-	    branch=\"$2\"; \
-        git branch -D \"$author/$branch\"; \
-	    git branch -D --remote \"$author/$branch\"; \
-	    git remote remove \"$author\"; \
+	author=\"$1\"; \
+        branch=\"$2\"; \
+    	echo \"Removing local branch $author/$branch...\"; \
+    	git branch -D \"$author/$branch\"; \
+    	echo \"Removing remote-tracking branch $author/$branch...\"; \
+    	git branch -D --remote \"$author/$branch\"; \
+    	echo \"Removing remote $author...\"; \
+	git remote remove \"$author\"; \
+	echo \"Completed\"; \
     }; f"
+
 
 # Core settings
 [core]
