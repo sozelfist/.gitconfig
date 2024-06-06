@@ -16,6 +16,7 @@ ln -s .git/.gitconfig .gitconfig
 - [`gh`](https://github.com/cli/cli): GitHub’s official command line tool
 - [`gpg`](https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key): Telling Git about your signing key
 - [`gpg-credential-store`](https://github.com/git-ecosystem/git-credential-manager/blob/main/docs/credstores.md#gpgpass-compatible-files): Secure, cross-platform Git credential storage with authentication to GitHub, Azure Repos, and other popular Git hosting services.
+- [Login to multiple account with `gh`](https://github.com/cli/cli/blob/54d56cab3a0882b43ac794df59924dc3f93bb75c/docs/multiple-accounts.md): Multiple Accounts with the CLI - v2.40.0
 
 ## Contributing
 
