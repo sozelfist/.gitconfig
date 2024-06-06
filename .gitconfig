@@ -194,4 +194,4 @@
 
 # Configuration for a secondary user (example)
 # [includeIf "gitdir:~/workspace/secondary/"]
-#    path = ~/.git/.secondary.gitconfig
+#    path = ~/workspace/secondary/.gitconfig
